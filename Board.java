@@ -1,6 +1,7 @@
 public class Board {
    private Piece[][] board= new Piece[8][8];
 private Piece piece;
+private Game game;
 int pos1=0;
 int pos2=0;
 Board(){
@@ -30,12 +31,19 @@ for(int i=0;i<3;i++){
 }
 
 }
+public int getPosition1(int x, int y){
+    return board[x][y].getPosition1();
 
+}
+public int getPosition2(int x, int y){
+    return board[x][y].getPosition2();
+
+}
 public void movePiece(){
-    board[0][5].setPosition(board[0][5].move1(board[0][5].getPosition1()),board[0][5].move2(board[0][5].getPosition2()));
+    board[Game.getPosition1()][Game.getPosition2()].setPosition(board[Game.getPosition1()][Game.getPosition2()].move1(board[Game.getPosition1()][Game.getPosition2()].getPosition1()),board[Game.getPosition1()][Game.getPosition2()].move2(board[Game.getPosition1()][Game.getPosition2()].getPosition2()));
    
-   board[0+1][5]=board[0][5];
-   board[0][5]=null;
+   board[Game.getPosition1()+1][Game.getPosition2()-1]=board[Game.getPosition1()][Game.getPosition2()];
+   board[Game.getPosition1()][Game.getPosition2()]=null;
    
  
 }

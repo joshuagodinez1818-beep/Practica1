@@ -6,7 +6,7 @@ public class BlackPiece extends Piece {
         return pos;
     }
      public int move2(int pos){
-        pos += 0;
+        pos -= 1;
         return pos;
     }
 }
