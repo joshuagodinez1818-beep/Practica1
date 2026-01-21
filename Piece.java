@@ -20,6 +20,9 @@ public int getPosition1() {
 public int getPosition2() {
     return position2;
 }
+public String getColor() {
+    return "Piece";
+}
 public int move1(int pos) {
     //position += 1;
     //System.out.println("Game started!");

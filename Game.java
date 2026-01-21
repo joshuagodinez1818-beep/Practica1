@@ -14,72 +14,62 @@ public class Game extends JPanel {
 
     private Rectangle place1 = new Rectangle(10, 100, 100, 50);
     private Rectangle place2 = new Rectangle(100, 200, 100, 50);
-    private static int position1, position2, positionF1, positionF2, positionF3, positionF4;
+    private static int position1, position2;
     private static int [] pos= new int[4];
-    private Piece piece;
+  //  private Piece piece;
     private static int j,i;
      boolean passed = false, passed1= false;
+     boolean []firstMove= new boolean[4];
     public Game() {
         board = new Board();
         
     }
 
+public void pieces(int p1, int p2, int i1, int j1, int fM) {
+    if(!firstMove[fM]){
+      position1= p1;
+     position2=p2;
+                 
+    }else{
+      position1 = pos[i];
+      position2 = pos[j];
+                
+  }
+     i=i1;j=j1;
+}
+
+public void places(int p1, int p2) {
+
+ pos[i] = p1;
+ pos[j] = p2;
+                 
+  if(board.movePiece()){
+     firstMove[i]=true;
+  }          
+   repaint(); 
+
+}
 
     // EVENTOS DEL MOUSE
     public void actions() {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (piece1.contains(e.getPoint())) {
-                  
-                   if(passed==false){
-                    position1= 2;
-                    position2=7;
-                      passed=true;
-                   }else{
-                    position1 = pos[i];
-                    position2 = pos[j];
+                // Position pices
+                 if (piece1.contains(e.getPoint())) {
+                    pieces(2, 7, 0, 1, 0);}
+                  if (piece2.contains(e.getPoint())) {
+                   pieces(2, 1, 2, 3, 2);}
                 
-                   }
-                     i=0;j=1;
-                }
-    
-                    if (piece2.contains(e.getPoint())) {
-                  
-                   if(passed1==false){
-                    position1= 2;
-                    position2=1;
-                      passed1=true;
-                   }else{
-                    position1 = pos[i];
-                    position2 = pos[j];
-                   }
-                   i=2;j=3;
-                }
 
-
-
+                // Position to move
                  if (place1.contains(e.getPoint())){
-                    pos[i] = 3;
-                    pos[j] = 6;
-                  //  positionF1++;
-                   // positionF2--;
-                    board.movePiece();
-                     repaint(); // Vuelve a dibujar
-                  
-                 }
-                if (place2.contains(e.getPoint())){
-                    pos[i] = 4;
-                    pos[j] = 5;
-                  //  positionF1++;
-                   // positionF2--;
-                    board.movePiece();
-                     repaint(); // Vuelve a dibujar
+                    places(3,6);}        
+                  if (place2.contains(e.getPoint())){
+                   places(4,6);  }      
+             }
 
-                  
-                 }
-
-            }
+            
         });
     }
 
@@ -93,14 +83,14 @@ public class Game extends JPanel {
           g.setColor(Color.BLUE);
          g.fillRect(place1.x, place1.y, place1.width, place1.height);
 
-              g.setColor(Color.BLUE);
+         g.setColor(Color.BLUE);
          g.fillRect(place2.x, place2.y, place2.width, place2.height);
 
         // Círculo rojo
         g.setColor(Color.RED);
         g.fillOval(piece1.x, piece1.y, piece1.width, piece1.height);
 
- g.setColor(Color.RED);
+        g.setColor(Color.RED);
         g.fillOval(piece2.x, piece2.y, piece2.width, piece2.height);
 
 

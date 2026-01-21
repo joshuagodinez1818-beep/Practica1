@@ -1,7 +1,7 @@
 public class Board {
    private Piece[][] board= new Piece[8][8];
-private Piece piece;
-private Game game;
+//private Piece piece;
+//private Game game;
 int pos1=0;
 int pos2=0;
 Board(){
@@ -39,18 +39,37 @@ public int getPosition2(int x, int y){
     return board[x][y].getPosition2();
 
 }
-public void movePiece(){
+public boolean movePiece(){
    /*  board[Game.getPosition1()][Game.getPosition2()].setPosition(board[Game.getPosition1()][Game.getPosition2()].move1(board[Game.getPosition1()][Game.getPosition2()].getPosition1()),board[Game.getPosition1()][Game.getPosition2()].move2(board[Game.getPosition1()][Game.getPosition2()].getPosition2()));
    
    board[Game.getPosition1()+1][Game.getPosition2()-1]=board[Game.getPosition1()][Game.getPosition2()];
    board[Game.getPosition1()][Game.getPosition2()]=null;
    */
-board[game.getpos1(game.getI())][game.getpos2(game.getJ())]=board[game.getPosition1()][game.getPosition2()];
- board[game.getpos1(game.getI())][game.getpos2(game.getJ())].setPosition(game.getpos1(game.getI()), game.getpos2(game.getJ()));
+
+try{
+if(board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())]!=null){
+    throw new Exception("Invalid Move - Position Occupied");}
+    else if(Game.getpos1(Game.getI()) == Game.getPosition1() || Game.getpos2(Game.getJ()) == Game.getPosition2()){
+throw new Exception("Invalid Move - Pieces must move diagonally");}
+    else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == "White" && Game.getpos1(Game.getI()) > Game.getPosition1()){
+        throw new Exception("Invalid Move - White pieces can only move upwards");
+    }else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == "Black" && Game.getpos1(Game.getI()) < Game.getPosition1()){
+        throw new Exception("Invalid Move - Black pieces can only move downwards");}
+    else{
+board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())]=board[Game.getPosition1()][Game.getPosition2()];
+ board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())].setPosition(Game.getpos1(Game.getI()), Game.getpos2(Game.getJ()));
 
 
    
-board[game.getPosition1()][game.getPosition2()]=null;
+board[Game.getPosition1()][Game.getPosition2()]=null;
+return true;
+    }
+}catch(Exception e){
+    System.out.println(e.getMessage());
+    return false;
+}
+
+
 
  
 }
