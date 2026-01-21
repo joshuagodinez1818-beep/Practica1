@@ -9,12 +9,15 @@ import java.awt.event.MouseEvent;
 public class Game extends JPanel {
 
     private Board board;
-    private Rectangle boton1 = new Rectangle(10, 10, 100, 50);
-    private Rectangle boton2 = new Rectangle(10, 100, 100, 50);
-    private Rectangle boton3 = new Rectangle(100, 100, 100, 50);
-    private Rectangle boton4 = new Rectangle(100, 200, 100, 50);
+    private Rectangle piece1 = new Rectangle(10, 10, 100, 50);
+    private Rectangle piece2 = new Rectangle(100, 100, 100, 50);
+
+    private Rectangle place1 = new Rectangle(10, 100, 100, 50);
+    private Rectangle place2 = new Rectangle(100, 200, 100, 50);
     private static int position1, position2, positionF1, positionF2, positionF3, positionF4;
+    private static int [] pos= new int[4];
     private Piece piece;
+    private static int j,i;
      boolean passed = false, passed1= false;
     public Game() {
         board = new Board();
@@ -27,53 +30,47 @@ public class Game extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (boton1.contains(e.getPoint())) {
+                if (piece1.contains(e.getPoint())) {
                   
                    if(passed==false){
                     position1= 2;
                     position2=7;
                       passed=true;
                    }else{
-                    position1 = positionF1;
-                    position2 = positionF2;
-                   }
-                 
-                   
-
-
-             
+                    position1 = pos[i];
+                    position2 = pos[j];
                 
-
+                   }
+                     i=0;j=1;
                 }
-              
-                 if (boton2.contains(e.getPoint())){
-                    positionF1 = 3;
-                    positionF2= 6;
-                  //  positionF1++;
-                   // positionF2--;
-                    board.movePiece();
-                     repaint(); // Vuelve a dibujar
-                  
-                 }
-                    if (boton3.contains(e.getPoint())) {
+    
+                    if (piece2.contains(e.getPoint())) {
                   
                    if(passed1==false){
                     position1= 2;
                     position2=1;
                       passed1=true;
                    }else{
-                    position1 = positionF3;
-                    position2 = positionF4;
+                    position1 = pos[i];
+                    position2 = pos[j];
                    }
-
-
-             
-                
-
+                   i=2;j=3;
                 }
-                if (boton4.contains(e.getPoint())){
-                    positionF1 = 4;
-                    positionF2= 5;
+
+
+
+                 if (place1.contains(e.getPoint())){
+                    pos[i] = 3;
+                    pos[j] = 6;
+                  //  positionF1++;
+                   // positionF2--;
+                    board.movePiece();
+                     repaint(); // Vuelve a dibujar
+                  
+                 }
+                if (place2.contains(e.getPoint())){
+                    pos[i] = 4;
+                    pos[j] = 5;
                   //  positionF1++;
                    // positionF2--;
                     board.movePiece();
@@ -94,17 +91,17 @@ public class Game extends JPanel {
         setBackground(Color.WHITE);
 
           g.setColor(Color.BLUE);
-         g.fillRect(boton2.x, boton2.y, boton2.width, boton2.height);
+         g.fillRect(place1.x, place1.y, place1.width, place1.height);
 
               g.setColor(Color.BLUE);
-         g.fillRect(boton4.x, boton4.y, boton4.width, boton4.height);
+         g.fillRect(place2.x, place2.y, place2.width, place2.height);
 
         // Círculo rojo
         g.setColor(Color.RED);
-        g.fillOval(boton1.x, boton1.y, boton1.width, boton1.height);
+        g.fillOval(piece1.x, piece1.y, piece1.width, piece1.height);
 
  g.setColor(Color.RED);
-        g.fillOval(boton3.x, boton3.y, boton3.width, boton3.height);
+        g.fillOval(piece2.x, piece2.y, piece2.width, piece2.height);
 
 
          g.setColor(Color.RED);
@@ -133,7 +130,19 @@ public static int getPosition1() {
     }
     public static int getPosition2() {
         return position2;
+    } 
+    public static int getI() {
+        return i;
+    } 
+   public static int getJ() {
+        return j;
     }   
+     public static int getpos1(int i) {
+        return pos[i];
+    } 
+     public static int getpos2(int j) {
+        return pos[j];
+    } 
     public static void main(String[] args) {
         Game game = new Game();
         game.start();

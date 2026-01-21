@@ -6,7 +6,7 @@ int pos1=0;
 int pos2=0;
 Board(){
 
-for(int i=0;i<3;i++){
+for(int i=0;i<8;i++){
     for(int j=0;j<8;j++){
        if((i==0 || i==2) && j%2 !=0 ){
            board[i][j]=new BlackPiece();
@@ -40,11 +40,18 @@ public int getPosition2(int x, int y){
 
 }
 public void movePiece(){
-    board[Game.getPosition1()][Game.getPosition2()].setPosition(board[Game.getPosition1()][Game.getPosition2()].move1(board[Game.getPosition1()][Game.getPosition2()].getPosition1()),board[Game.getPosition1()][Game.getPosition2()].move2(board[Game.getPosition1()][Game.getPosition2()].getPosition2()));
+   /*  board[Game.getPosition1()][Game.getPosition2()].setPosition(board[Game.getPosition1()][Game.getPosition2()].move1(board[Game.getPosition1()][Game.getPosition2()].getPosition1()),board[Game.getPosition1()][Game.getPosition2()].move2(board[Game.getPosition1()][Game.getPosition2()].getPosition2()));
    
    board[Game.getPosition1()+1][Game.getPosition2()-1]=board[Game.getPosition1()][Game.getPosition2()];
    board[Game.getPosition1()][Game.getPosition2()]=null;
+   */
+board[game.getpos1(game.getI())][game.getpos2(game.getJ())]=board[game.getPosition1()][game.getPosition2()];
+ board[game.getpos1(game.getI())][game.getpos2(game.getJ())].setPosition(game.getpos1(game.getI()), game.getpos2(game.getJ()));
+
+
    
+board[game.getPosition1()][game.getPosition2()]=null;
+
  
 }
 }
