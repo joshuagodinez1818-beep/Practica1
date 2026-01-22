@@ -10,6 +10,7 @@ public class Game extends JPanel {
 
     private Board board;
     private Rectangle piece1 = new Rectangle(373, 85, 65, 65);
+    /* 
     private Rectangle piece2 = new Rectangle(piece1.x+200, piece1.y, 65, 65);
     private Rectangle piece3 = new Rectangle(200, 200, 100, 50);
     private Rectangle piece4 = new Rectangle(300, 300, 100, 50);
@@ -25,18 +26,20 @@ public class Game extends JPanel {
     private Rectangle piece14 = new Rectangle(100, 100, 100, 50);
     private Rectangle piece15 = new Rectangle(200, 200, 100, 50);
     private Rectangle piece16 = new Rectangle(300, 300, 100, 50);
-
-
+    */
+  private Rectangle [] piece = new Rectangle[12];
 
     private Rectangle place1 = new Rectangle(370, 85, 70, 70);
-    private Rectangle place2= new Rectangle(370+202, 85, 70, 70);
-    private Rectangle[] place3 = new Rectangle[100];
+   // private Rectangle place2= new Rectangle(370+202, 85, 70, 70);
+    private Rectangle[] place3 = new Rectangle[40];
     private static int position1, position2;
     private static int [] pos= new int[31];
   //  private Piece piece;
-    private static int j,i,x,y;
+    private static int j,i;
      boolean passed = false, passed1= false;
-     boolean []firstMove= new boolean[4];
+     boolean []firstMove= new boolean[31];
+            int aux2=0;
+                int aux=0;
     public Game() {
         board = new Board();
         
@@ -72,44 +75,122 @@ public void places(int p1, int p2) {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Position pices
-                 if (piece1.contains(e.getPoint())) {
-                    pieces(0, 1, 0, 1);}
-                  if (piece2.contains(e.getPoint())) {
-                   pieces(0, 3, 2, 3);}
-                   if (piece3.contains(e.getPoint())) {
-                    pieces(0, 5, 4, 5);}
-                  if (piece4.contains(e.getPoint())) {
-                   pieces(0, 7, 6, 7);}
-                       if (piece5.contains(e.getPoint())) {
-                    pieces(1, 0, 8, 9);}
-                  if (piece6.contains(e.getPoint())) {
-                   pieces(1, 2, 10, 11);}
-                   if (piece7.contains(e.getPoint())) {
-                    pieces(1, 4, 12, 13);}
-                  if (piece8.contains(e.getPoint())) {
-                   pieces(1, 6, 14, 15);}
-                   if (piece9.contains(e.getPoint())) {
-                    pieces(2, 1, 16, 17);}
-                  if (piece10.contains(e.getPoint())) {
-                   pieces(2, 3, 18, 19);}
-                   if (piece11.contains(e.getPoint())) {
-                    pieces(2, 5, 20, 21);}
-                  if (piece12.contains(e.getPoint())) {
-                   pieces(2, 7, 22, 23);}
-                   if (piece13.contains(e.getPoint())) {
+                 if (piece[0].contains(e.getPoint())) {
+                    pieces(0, 0, 0, 1);}
+                  if (piece[1].contains(e.getPoint())) {
+                   pieces(2, 0, 2, 3);}
+                   if (piece[2].contains(e.getPoint())) {
+                    pieces(1, 1, 4, 5);}
+                  if (piece[3].contains(e.getPoint())) {
+                   pieces(0, 2, 6, 7);}
+                   if (piece[4].contains(e.getPoint())) {
+                    pieces(2, 2, 8, 9);}
+                  if (piece[5].contains(e.getPoint())) {
+                   pieces(1, 3, 10, 11);}
+                   if (piece[6].contains(e.getPoint())) {
+                    pieces(0, 4, 12, 13);}
+                  if (piece[7].contains(e.getPoint())) {
+                   pieces(2, 4, 14, 15);}
+                   if (piece[8].contains(e.getPoint())) {
+                    pieces(1, 5, 16, 17);}
+                  if (piece[9].contains(e.getPoint())) {
+                   pieces(0, 6, 18, 19);}
+                   if (piece[10].contains(e.getPoint())) {
+                    pieces(2, 6, 20, 21);}
+                  if (piece[11].contains(e.getPoint())) {
+                   pieces(1, 7, 22, 23);}
+                 /* 
+                   if (piece[12].contains(e.getPoint())) {
                     pieces(3, 0, 24, 25);}
-                  if (piece14.contains(e.getPoint())) {
+                  if (piece[13].contains(e.getPoint())) {
                    pieces(3, 2, 26, 27);}
-                   if (piece15.contains(e.getPoint())) {
+                   if (piece[14].contains(e.getPoint())) {
                     pieces(3, 4, 28, 29);}
-                  if (piece16.contains(e.getPoint())) {
+                  if (piece[15].contains(e.getPoint())) {
                    pieces(3, 6, 30, 31);}
-
+ */
                 // Position to move
-                 if (place3[5].contains(e.getPoint())){
-                    places(3,6);}        
+                 if (place3[0].contains(e.getPoint())){
+                    places(1, 0);}        
                   if (place3[1].contains(e.getPoint())){
-                   places(3,1);  }      
+                   places(3, 0);  }    
+                    if (place3[2].contains(e.getPoint())){
+                    places(4, 0);}        
+                  if (place3[3].contains(e.getPoint())){
+                   places(5, 0);  }   
+                     if (place3[4].contains(e.getPoint())){
+                   places(7, 0);  }   
+                     if (place3[5].contains(e.getPoint())){
+                    places(0, 1);}        
+                  if (place3[6].contains(e.getPoint())){
+                   places(2, 1);  }    
+                    if (place3[7].contains(e.getPoint())){
+                    places(3, 1);}        
+                  if (place3[8].contains(e.getPoint())){
+                   places(4, 1);  }   
+                     if (place3[9].contains(e.getPoint())){
+                   places(6, 1);  } 
+                 if (place3[10].contains(e.getPoint())){
+                    places(1, 2);}        
+                  if (place3[11].contains(e.getPoint())){
+                   places(3, 2);  }    
+                    if (place3[12].contains(e.getPoint())){
+                    places(4, 2);}        
+                  if (place3[13].contains(e.getPoint())){
+                   places(5, 2);  }   
+                     if (place3[14].contains(e.getPoint())){
+                   places(7, 2);  }  
+                    if (place3[15].contains(e.getPoint())){
+                    places(0, 3);}        
+                  if (place3[16].contains(e.getPoint())){
+                   places(2, 3);  }    
+                    if (place3[17].contains(e.getPoint())){
+                    places(3, 3);}        
+                  if (place3[18].contains(e.getPoint())){
+                   places(4, 3);  }   
+                     if (place3[19].contains(e.getPoint())){
+                   places(6, 3);  } 
+                    if (place3[20].contains(e.getPoint())){
+                    places(1, 4);}
+                    if (place3[21].contains(e.getPoint())){
+                    places(3, 4);}
+                    if (place3[22].contains(e.getPoint())){
+                    places(4, 4);}
+                    if (place3[23].contains(e.getPoint())){
+                    places(5, 4);}
+                    if (place3[24].contains(e.getPoint())){
+                    places(7, 4);}
+                    if (place3[25].contains(e.getPoint())){
+                    places(0, 5);}
+                    if (place3[26].contains(e.getPoint())){
+                    places(2, 5);}
+                    if (place3[27].contains(e.getPoint())){
+                    places(3, 5);}
+                    if (place3[28].contains(e.getPoint())){
+                    places(4, 5);}
+                    if (place3[29].contains(e.getPoint())){
+                    places(6, 5);}
+                    if (place3[30].contains(e.getPoint())){
+                    places(1, 6);}
+                    if (place3[31].contains(e.getPoint())){
+                    places(3, 6);}
+                    if (place3[32].contains(e.getPoint())){
+                    places(4, 6);}
+                    if (place3[33].contains(e.getPoint())){
+                    places(5, 6);}
+                    if (place3[34].contains(e.getPoint())){
+                    places(7, 6);}
+                    if (place3[35].contains(e.getPoint())){
+                    places(0, 7);}
+                    if (place3[36].contains(e.getPoint())){
+                    places(2, 7);}
+                    if (place3[37].contains(e.getPoint())){
+                    places(3, 7);}
+                    if (place3[38].contains(e.getPoint())){
+                    places(4, 7);}
+                    if (place3[39].contains(e.getPoint())){
+                    places(6, 7);}
+                    
              }
 
             
@@ -124,13 +205,20 @@ public void places(int p1, int p2) {
         setBackground(Color.WHITE);
 
        // Círculo rojo
-       
+
        for(int i=0;i<8;i++){
-        for(int j=0;j<1;j++){
+        for(int j=0;j<8;j++){
             if((j==0 && i%2==0) || (j==1 && i%2!=0) || (j==2 && i%2==0)){
          g.setColor(Color.RED);
          g.fillOval(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
+         
+          
+         if(aux2<12){
+            piece[aux2]=new Rectangle(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
+            aux2++;}
+
             }
+
         }
     }
       // g.setColor(Color.RED);
@@ -145,19 +233,22 @@ public void places(int p1, int p2) {
 
 
 
-int aux=0;
+//int aux=0;
  for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
-           if((j==0 && i%2!=0) || (j==1 ) || (j==2 && i%2!=0) || (j==3 && i%2==0) || (j==4 && i%2!=0) || (j==5 && i%2==0) || (j==6 && i%2!=0) || (j==7 && i%2==0)){ {
+           if((j==0 && i%2!=0) || (j==1 && i%2==0) || (j==2 && i%2!=0) || (j==3 /*&& i%2==0*/) || (j==4 /*&& i%2!=0*/) || (j==5 && i%2==0) || (j==6 && i%2!=0) || (j==7 && i%2==0)){ {
          g.setColor(Color.RED);
          g.setColor(new Color(100, 149, 237,100));
          g.fillRect(place1.x + i*72, place1.y + j*72, place1.width, place1.height);
-        place3[aux]=new Rectangle(place1.x + i*72, place1.y + j*72, place1.width, place1.height);
+         
+         if(aux<40){
+       place3[aux]=new Rectangle(place1.x + i*72, place1.y + j*72, place1.width, place1.height);
         aux++;
         }
         }
     }
     }
+}
  //   place1=new Rectangle(place1.x + 0*72, place1.y + 1*72, place1.width, place1.height);
     /*
         g.setColor(Color.BLUE);

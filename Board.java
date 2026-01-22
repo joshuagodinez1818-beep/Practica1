@@ -8,17 +8,11 @@ Board(){
 
 for(int i=0;i<8;i++){
     for(int j=0;j<8;j++){
-       if((i==0 || i==2) && j%2 !=0 ){
-           board[i][j]=new BlackPiece();
-          board[i][j].setPosition(pos2,pos1);
-         } else if(i==1 && j%2 == 0){
-           board[i][j]=new BlackPiece();
+       if((i==0 && j%2 == 0) || (i==2 && j%2 ==0) || (i==1 && j%2 != 0) ){
+            board[i][j]=new BlackPiece();
             board[i][j].setPosition(pos2,pos1);
          }
-         else if((i==5 || i==7) && j%2==0){
-           board[i][j]=new WhitePiece();
-            board[i][j].setPosition(pos2,pos1);
-         } else if(i==6 && j%2 != 0){
+         else if((i==5 && j%2 != 0)||( i==7 && j%2 != 0) || (i==6 && j%2 == 0)){
            board[i][j]=new WhitePiece();
             board[i][j].setPosition(pos2,pos1);
          } else {
@@ -55,6 +49,10 @@ throw new Exception("Invalid Move - Pieces must move diagonally");}
         throw new Exception("Invalid Move - White pieces can only move upwards");
     }else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == "Black" && Game.getpos1(Game.getI()) < Game.getPosition1()){
         throw new Exception("Invalid Move - Black pieces can only move downwards");}
+        else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == null){
+        throw new Exception("Invalid Move - No piece selected");}
+          else if(Game.getpos1(Game.getI()) - Game.getPosition1() > 1 || Game.getpos1(Game.getI()) - Game.getPosition1() < -1 || Game.getpos2(Game.getJ()) - Game.getPosition2() > 1 || Game.getpos2(Game.getJ()) - Game.getPosition2() < -1){
+        throw new Exception("Invalid Move - Only one square diagonally");}
     else{
 board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())]=board[Game.getPosition1()][Game.getPosition2()];
  board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())].setPosition(Game.getpos1(Game.getI()), Game.getpos2(Game.getJ()));
