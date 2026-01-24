@@ -27,12 +27,12 @@ public class Game extends JPanel {
     private Rectangle piece15 = new Rectangle(200, 200, 100, 50);
     private Rectangle piece16 = new Rectangle(300, 300, 100, 50);
     */
-  private Rectangle [] piece = new Rectangle[4];
+  private Rectangle [] piece = new Rectangle[12];
 
     private Rectangle place1 = new Rectangle(372, 85, 70, 70);
    // private Rectangle place2= new Rectangle(370+202, 85, 70, 70);
     private Rectangle[] place3 = new Rectangle[40];
-    private static int position1, position2;
+    private static int position1=-1, position2=-1;
     private static int [] pos= new int[31];
   //  private Piece piece;
     private static int j,i;
@@ -40,9 +40,12 @@ public class Game extends JPanel {
      boolean []firstMove= new boolean[31];
             int aux2=0;
                 int aux=0;
+                 int aux3=0;
+                int aux4=0;
                 int Npiece=-1;
                 int Nplace=-1;
                 boolean moved=false;
+                boolean arrastrando=false;
     public Game() {
         board = new Board();
         
@@ -65,6 +68,21 @@ public int  positionX(int x) {
   case 444:
     return 1;
  
+      case 516:
+    return 2;
+    
+      case 588:
+    return 3;
+      case 660:
+    return 4;
+    
+      case 732:
+    return 5;
+      case 804:
+    return 6;
+      case 876:
+    return 7;
+ 
   default:
     return -1;
  }
@@ -79,6 +97,21 @@ public int  positionY(int y) {
   case 157:
     return 1;
  
+      case 229:
+    return 2;
+    
+      case 301:
+    return 3;
+      case 373:
+    return 4;
+    
+      case 445:
+    return 5;
+      case 517:
+    return 6;
+      case 589:
+    return 7;
+
   default:
     return -1;
  }
@@ -87,7 +120,8 @@ public int  positionY(int y) {
 
 
 public void pieces(int p1, int p2, int i1, int j1) {
-    if(!firstMove[i1]){
+   i=i1;j=j1;
+  if(!firstMove[i1]){
       position1= p1;
      position2=p2;
                  
@@ -96,14 +130,18 @@ public void pieces(int p1, int p2, int i1, int j1) {
       position2 = pos[j];
                 
   }
-     i=i1;j=j1;
+     
      moved=true;
 }
 
 public void places(int p1, int p2) {
-
+aux3=pos[i];
+aux4=pos[j];  
+//aux3=p1;
+//aux4=p2;
  pos[i] = p1;
  pos[j] = p2;
+
                  
   if(board.movePiece()){
      firstMove[i]=true;
@@ -121,7 +159,11 @@ public void places(int p1, int p2) {
             }
           }
       } 
-    
+    position1=-1;
+    position2=-1;
+      }else{
+          pos[i]=aux3;
+          pos[j]=aux4;
       }
    repaint(); 
 
@@ -131,7 +173,7 @@ public void places(int p1, int p2) {
     public void actions() {
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 // Position pices
                  if (piece[0].contains(e.getPoint())) {
                     pieces(0, 0, 0, 1);
@@ -140,6 +182,7 @@ public void places(int p1, int p2) {
                   if (piece[1].contains(e.getPoint())) {
                    pieces(2, 0, 2, 3);
                    Npiece=1;
+                   arrastrando = true;
                   }
                    if (piece[2].contains(e.getPoint())) {
                     pieces(1, 1, 4, 5);
@@ -148,7 +191,7 @@ public void places(int p1, int p2) {
                   if (piece[3].contains(e.getPoint())) {
                    pieces(0, 2, 6, 7);
                    Npiece=3;}
-                  /*  if (piece[4].contains(e.getPoint())) {
+                    if (piece[4].contains(e.getPoint())) {
                     pieces(2, 2, 8, 9);
                     Npiece=4;}
                   if (piece[5].contains(e.getPoint())) {
@@ -187,131 +230,130 @@ public void places(int p1, int p2) {
                  if (place3[0].contains(e.getPoint())){
                   Nplace=0;
 
-                    places( positionX(place3[0].x), positionY(place3[0].y));} 
+                    places( positionY(place3[0].y), positionX(place3[0].x));} 
 
                   if (place3[1].contains(e.getPoint())){
                   Nplace=1;
-                    places(3, 0);  }    
+                    places(positionY(place3[1].y), positionX(place3[1].x));  }    
                     if (place3[2].contains(e.getPoint())){
                        Nplace=2;                   
-                      places(4, 0);}        
+                      places(positionY(place3[2].y), positionX(place3[2].x));}        
                   if (place3[3].contains(e.getPoint())){
                    Nplace=3;
-                    places(5, 0);  }   
+                    places(positionY(place3[3].y), positionX(place3[3].x));  }   
                      if (place3[4].contains(e.getPoint())){
                     Nplace=4;
-                   places(7, 0);  }   
+                   places(positionY(place3[4].y), positionX(place3[4].x));  }   
                      if (place3[5].contains(e.getPoint())){
                     Nplace=5;
-                    places(0, 1);}        
+                    places(positionY(place3[5].y), positionX(place3[5].x));}        
                   if (place3[6].contains(e.getPoint())){
                     Nplace=6;
-                   places(2, 1);  }    
+                   places(positionY(place3[6].y), positionX(place3[6].x));  }    
                     if (place3[7].contains(e.getPoint())){
                     Nplace=7;
-                    places(positionX(place3[7].x), positionY(place3[7].y));Nplace=7;}        
+                    places(positionY(place3[7].y), positionX(place3[7].x));Nplace=7;}        
                   if (place3[8].contains(e.getPoint())){
                     Nplace=8;
-                   places(4, 1);  }   
+                   places(positionY(place3[8].y), positionX(place3[8].x));  }   
                      if (place3[9].contains(e.getPoint())){
                     Nplace=9;
-                   places(6, 1);  } 
+                   places(positionY(place3[9].y), positionX(place3[9].x));  } 
                  if (place3[10].contains(e.getPoint())){
 
-                    places(1, 2);}        
+                    places(positionY(place3[10].y), positionX(place3[10].x));}        
                   if (place3[11].contains(e.getPoint())){
                       Nplace=11;
-                   places(3, 2);  }    
+                   places(positionY(place3[11].y), positionX(place3[11].x));  }    
                     if (place3[12].contains(e.getPoint())){
                     Nplace=12;
-                    places(4, 2);}        
+                    places(positionY(place3[12].y), positionX(place3[12].x));}        
                   if (place3[13].contains(e.getPoint())){
                     Nplace=13;
-                   places(5, 2);  }   
+                   places(positionY(place3[13].y), positionX(place3[13].x));  }   
                      if (place3[14].contains(e.getPoint())){
                     Nplace=14;
-                   places(7, 2);  }  
+                   places(positionY(place3[14].y), positionX(place3[14].x));  }  
                     if (place3[15].contains(e.getPoint())){
                     Nplace=15;
-                    places(0, 3);}        
+                    places(positionY(place3[15].y), positionX(place3[15].x));}        
                   if (place3[16].contains(e.getPoint())){
                     Nplace=16;
-                   places(2, 3);  }    
+                   places(positionY(place3[16].y), positionX(place3[16].x));  }    
                     if (place3[17].contains(e.getPoint())){
                     Nplace=17;
-                    places(3, 3);}        
+                    places(positionY(place3[17].y), positionX(place3[17].x));}        
                   if (place3[18].contains(e.getPoint())){
                     Nplace=18;
-                   places(4, 3);  }   
+                   places(positionY(place3[18].y), positionX(place3[18].x));  }   
                      if (place3[19].contains(e.getPoint())){
                     Nplace=19;
-                   places(6, 3);  } 
+                   places(positionY(place3[19].y), positionX(place3[19].x));  } 
                     if (place3[20].contains(e.getPoint())){
                       Nplace=20;
-                    places(1, 4);}
+                    places(positionY(place3[20].y), positionX(place3[20].x));}
                     if (place3[21].contains(e.getPoint())){
                       Nplace=21;
-                    places(3, 4);}
+                    places(positionY(place3[21].y), positionX(place3[21].x));}
                     if (place3[22].contains(e.getPoint())){
                     Nplace=22;
-                    places(4, 4);}
+                    places(positionY(place3[22].y), positionX(place3[22].x));}
                     if (place3[23].contains(e.getPoint())){
                     Nplace=23;
-                    places(5, 4);}
+                    places(positionY(place3[23].y), positionX(place3[23].x));}
                     if (place3[24].contains(e.getPoint())){
                     Nplace=24;
-                    places(7, 4);}
+                    places(positionY(place3[24].y), positionX(place3[24].x));}
                     if (place3[25].contains(e.getPoint())){
                     Nplace=25;
-                    places(0, 5);}
+                    places(positionY(place3[25].y), positionX(place3[25].x));}
                     if (place3[26].contains(e.getPoint())){
                     Nplace=26;
-                    places(2, 5);}
+                    places(positionY(place3[26].y), positionX(place3[26].x));}
                     if (place3[27].contains(e.getPoint())){
                     Nplace=27;
-                    places(3, 5);}
+                    places(positionY(place3[27].y), positionX(place3[27].x));}
                     if (place3[28].contains(e.getPoint())){
                     Nplace=28;
-                    places(4, 5);}
+                    places(positionY(place3[28].y), positionX(place3[28].x));}
                     if (place3[29].contains(e.getPoint())){
                     Nplace=29;
-                    places(6, 5);}
+                    places(positionY(place3[29].y), positionX(place3[29].x));}
                     if (place3[30].contains(e.getPoint())){
                     Nplace=30;
-                    places(1, 6);}
+                    places(positionY(place3[30].y), positionX(place3[30].x));}
                     if (place3[31].contains(e.getPoint())){
                     Nplace=31;
-                    places(3, 6);}
+                    places(positionY(place3[31].y), positionX(place3[31].x));}
                     if (place3[32].contains(e.getPoint())){
                     Nplace=32;
-                    places(4, 6);}
+                    places(positionY(place3[32].y), positionX(place3[32].x));}
                     if (place3[33].contains(e.getPoint())){
                     Nplace=33;
-                    places(5, 6);}
+                    places(positionY(place3[33].y), positionX(place3[33].x));}
                     if (place3[34].contains(e.getPoint())){
                     Nplace=34;
-                    places(7, 6);}
+                    places(positionY(place3[34].y), positionX(place3[34].x));}
                     if (place3[35].contains(e.getPoint())){
                     Nplace=35;
-                    places(0, 7);}
+                    places(positionY(place3[35].y), positionX(place3[35].x));}
                     if (place3[36].contains(e.getPoint())){
                     Nplace=36;
-                    places(2, 7);}
+                    places(positionY(place3[36].y), positionX(place3[36].x));}
                     if (place3[37].contains(e.getPoint())){
                        Nplace=37;
-                      places(3, 7);                 
+                      places(positionY(place3[37].y), positionX(place3[37].x));                 
                   }
                     if (place3[38].contains(e.getPoint())){
                     Nplace=38;
-                    places(4, 7);}
+                    places(positionY(place3[38].y), positionX(place3[38].x));}
                     if (place3[39].contains(e.getPoint())){
                     Nplace=39;
-                    places(6, 7);}
+                    places(positionY(place3[39].y), positionX(place3[39].x));}
                
              }
  
-            });
-
+        });
     }
  
     // DIBUJAR EN PANTALLA
@@ -328,12 +370,12 @@ if(moved==false){
 
        for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
-            if((j==0 && i%2==0) ){//|| (j==1 && i%2!=0) || (j==2 && i%2==0)){
+            if((j==0 && i%2==0)|| (j==1 && i%2!=0) || (j==2 && i%2==0)){
          g.setColor(Color.RED);
          g.fillOval(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
          
           
-         if(aux2<4){
+         if(aux2<12){
             piece[aux2]=new Rectangle(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
             aux2++;}
 
@@ -345,7 +387,7 @@ if(moved==false){
  for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
        
-             if((j==0 && i%2!=0) || (j==1/*&& i%2==0*/) || (j==2 /*&& i%2!=0*/) || (j==3 /*&& i%2==0*/) || (j==4 /*&& i%2!=0*/) || (j==5 && i%2==0) || (j==6 && i%2!=0) || (j==7 && i%2==0)){ {
+             if((j==0 && i%2!=0) || (j==1&& i%2==0) || (j==2 && i%2!=0) || (j==3 /*&& i%2==0*/) || (j==4 /*&& i%2!=0*/) || (j==5 && i%2==0) || (j==6 && i%2!=0) || (j==7 && i%2==0)){ {
          g.setColor(Color.RED);
          g.setColor(new Color(100, 149, 237,100));
          g.fillRect(place1.x + i*72, place1.y + j*72, place1.width, place1.height);
@@ -370,7 +412,7 @@ else{
 
         // Círculo rojo
   
-        for(int k=0;k<4;k++){
+        for(int k=0;k<12;k++){
           g.setColor(Color.RED);
           g.fillOval(piece[k].x, piece[k].y, piece[k].width, piece[k].height);
           
@@ -420,6 +462,12 @@ public static int getPosition1() {
      public static int getpos2(int j) {
         return pos[j];
     } 
+     public  int getAux3() {
+        return aux3;
+    } 
+     public  int getAux4() {
+         return aux4;
+    }
     public static void main(String[] args) {
         Game game = new Game();
         game.start();
