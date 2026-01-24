@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 public class Game extends JPanel {
 
     private Board board;
-    private Rectangle piece1 = new Rectangle(372, 85, 65, 65);
+    private Rectangle piece1 = new Rectangle(372, 85, 70, 70);
     /* 
     private Rectangle piece2 = new Rectangle(piece1.x+200, piece1.y, 65, 65);
     private Rectangle piece3 = new Rectangle(200, 200, 100, 50);
@@ -27,9 +27,9 @@ public class Game extends JPanel {
     private Rectangle piece15 = new Rectangle(200, 200, 100, 50);
     private Rectangle piece16 = new Rectangle(300, 300, 100, 50);
     */
-  private Rectangle [] piece = new Rectangle[12];
+  private Rectangle [] piece = new Rectangle[4];
 
-    private Rectangle place1 = new Rectangle(370, 83, 70, 70);
+    private Rectangle place1 = new Rectangle(372, 85, 70, 70);
    // private Rectangle place2= new Rectangle(370+202, 85, 70, 70);
     private Rectangle[] place3 = new Rectangle[40];
     private static int position1, position2;
@@ -47,6 +47,44 @@ public class Game extends JPanel {
         board = new Board();
         
     }
+/* 
+ public void test() {
+    for (int i = 0; i < 12; i++) {
+        if (piece[i] == place3[i]) {
+           place3[i]=null;
+        }
+    }
+    //return true;
+}
+*/
+public int  positionX(int x) {
+ switch (x) {
+  case 372:
+   return 0;
+  
+  case 444:
+    return 1;
+ 
+  default:
+    return -1;
+ }
+ 
+}
+
+public int  positionY(int y) {
+ switch (y) {
+  case 85:
+   return 0;
+  
+  case 157:
+    return 1;
+ 
+  default:
+    return -1;
+ }
+ 
+}
+
 
 public void pieces(int p1, int p2, int i1, int j1) {
     if(!firstMove[i1]){
@@ -76,21 +114,19 @@ public void places(int p1, int p2) {
          // piece1.y = piece1.y + j*72;
             if(j==p1 && i==p2){
               // place3[Nplace]=null;
-          place3[Nplace] = new Rectangle(piece[Npiece].x-2, piece[Npiece].y-2, place1.width, place1.height);
-        
+        place3[Nplace] = new Rectangle(piece[Npiece].x, piece[Npiece].y, place1.width, place1.height);
         piece[Npiece]=new Rectangle(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
         //place3[Nplace]=new Rectangle(place1.x + i, place1.y + j, place1.width, place1.height);
          //g.fillOval(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
             }
           }
       } 
-
- 
-            
+    
+      }
    repaint(); 
 
 }
-}
+
     // EVENTOS DEL MOUSE
     public void actions() {
         addMouseListener(new MouseAdapter() {
@@ -112,7 +148,7 @@ public void places(int p1, int p2) {
                   if (piece[3].contains(e.getPoint())) {
                    pieces(0, 2, 6, 7);
                    Npiece=3;}
-                   if (piece[4].contains(e.getPoint())) {
+                  /*  if (piece[4].contains(e.getPoint())) {
                     pieces(2, 2, 8, 9);
                     Npiece=4;}
                   if (piece[5].contains(e.getPoint())) {
@@ -150,7 +186,9 @@ public void places(int p1, int p2) {
                 // Position to move
                  if (place3[0].contains(e.getPoint())){
                   Nplace=0;
-                    places(0, 0);} 
+
+                    places( positionX(place3[0].x), positionY(place3[0].y));} 
+
                   if (place3[1].contains(e.getPoint())){
                   Nplace=1;
                     places(3, 0);  }    
@@ -171,7 +209,7 @@ public void places(int p1, int p2) {
                    places(2, 1);  }    
                     if (place3[7].contains(e.getPoint())){
                     Nplace=7;
-                    places(3, 1);Nplace=7;}        
+                    places(positionX(place3[7].x), positionY(place3[7].y));Nplace=7;}        
                   if (place3[8].contains(e.getPoint())){
                     Nplace=8;
                    places(4, 1);  }   
@@ -290,12 +328,12 @@ if(moved==false){
 
        for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
-            if((j==0 && i%2==0) || (j==1 && i%2!=0) || (j==2 && i%2==0)){
+            if((j==0 && i%2==0) ){//|| (j==1 && i%2!=0) || (j==2 && i%2==0)){
          g.setColor(Color.RED);
          g.fillOval(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
          
           
-         if(aux2<12){
+         if(aux2<4){
             piece[aux2]=new Rectangle(piece1.x + i*72, piece1.y + j*72, piece1.width, piece1.height);
             aux2++;}
 
@@ -306,7 +344,8 @@ if(moved==false){
 
  for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
-           if((j==0 && i%2!=0) || (j==1 && i%2==0) || (j==2 && i%2!=0) || (j==3 /*&& i%2==0*/) || (j==4 /*&& i%2!=0*/) || (j==5 && i%2==0) || (j==6 && i%2!=0) || (j==7 && i%2==0)){ {
+       
+             if((j==0 && i%2!=0) || (j==1/*&& i%2==0*/) || (j==2 /*&& i%2!=0*/) || (j==3 /*&& i%2==0*/) || (j==4 /*&& i%2!=0*/) || (j==5 && i%2==0) || (j==6 && i%2!=0) || (j==7 && i%2==0)){ {
          g.setColor(Color.RED);
          g.setColor(new Color(100, 149, 237,100));
          g.fillRect(place1.x + i*72, place1.y + j*72, place1.width, place1.height);
@@ -315,19 +354,23 @@ if(moved==false){
        place3[aux]=new Rectangle(place1.x + i*72, place1.y + j*72, place1.width, place1.height);
         aux++;
         }
-        }
+      }
     }
-    }
+   /// test();
+}
+}
 }
 
-}else{
+
+
+else{
 
 
 
 
         // Círculo rojo
   
-        for(int k=0;k<12;k++){
+        for(int k=0;k<4;k++){
           g.setColor(Color.RED);
           g.fillOval(piece[k].x, piece[k].y, piece[k].width, piece[k].height);
           
