@@ -49,8 +49,8 @@ try{
 throw new Exception("Invalid Move - Pieces must move diagonally");}
     else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == "White" && Game.getpos1(Game.getI()) > Game.getPosition1()){
         throw new Exception("Invalid Move - White pieces can only move upwards");
-    }///else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == "Black" && Game.getpos1(Game.getI()) < Game.getPosition1()){
-       // throw new Exception("Invalid Move - Black pieces can only move downwards");}
+    }else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == "Black" && Game.getpos1(Game.getI()) < Game.getPosition1()){
+        throw new Exception("Invalid Move - Black pieces can only move downwards");}
        // else if(board[Game.getPosition1()][Game.getPosition2()].getColor() == null){
         //throw new Exception("Invalid Move - No piece selected");}
           else if(Game.getpos1(Game.getI()) - Game.getPosition1() > 1 || Game.getpos1(Game.getI()) - Game.getPosition1() < -1 || Game.getpos2(Game.getJ()) - Game.getPosition2() > 1 || Game.getpos2(Game.getJ()) - Game.getPosition2() < -1){
