@@ -28,13 +28,13 @@ public class Game extends JPanel {
     private Rectangle piece16 = new Rectangle(300, 300, 100, 50);
     */
   private Rectangle [] piece = new Rectangle[24];
-
+ int num=14; 
     private Rectangle place1 = new Rectangle(372, 85, 70, 70);
    // private Rectangle place2= new Rectangle(370+202, 85, 70, 70);
     private Rectangle[] place3 = new Rectangle[40];
     private static int position1=-1, position2=-1;
     private static int [] pos= new int[48];
-  //  private Piece piece;
+  //  private Piece piece2;
     private static int j,i;
      boolean passed = false, passed1= false;
      boolean []firstMove= new boolean[48];
@@ -166,7 +166,7 @@ aux4=pos[j];
           pos[j]=aux4;
       }
    repaint(); 
-
+ //board.setComio(false);
 }
 
     // EVENTOS DEL MOUSE
@@ -441,11 +441,23 @@ else{
             g.setColor(Color.RED);
           }
         //  g.setColor(Color.RED);
-          g.fillOval(piece[k].x, piece[k].y, piece[k].width, piece[k].height);
-          
         
+        if(!board.getComio()){
+            //piece[k]=null;
+          g.fillOval(piece[k].x, piece[k].y, piece[k].width, piece[k].height);
+        }else{
+
+              //piece[k]=null;
+            //board.setComio(false);
+if(num== board.getPieceNumber(pos[i]-1, pos[j]-1)){
+num++;
+
+}else{
+g.fillOval(piece[k].x, piece[k].y, piece[k].width,piece[k].height);
+}
+
          }
-  
+          }
   for(int l=0;l<40;l++){
           g.setColor(Color.RED);
           g.setColor(new Color(100, 149, 237,100));

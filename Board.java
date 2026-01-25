@@ -4,6 +4,8 @@ public class Board {
 //private Game game;
 int pos1=0;
 int pos2=0;
+int pieceN=1;
+boolean comio=false;
 Board(){
 
 for(int i=0;i<8;i++){
@@ -11,12 +13,18 @@ for(int i=0;i<8;i++){
        if((i==0 && j%2 == 0)|| (i==2 && j%2 ==0) || (i==1 && j%2 != 0) ){
             board[i][j]=new BlackPiece();
             board[i][j].setPosition(pos2,pos1);
+            board[i][j].setNumber(pieceN);
+            pieceN++;
          }
          else if((i==5 && j%2 != 0)||( i==7 && j%2 != 0) || (i==6 && j%2 == 0)){
            board[i][j]=new WhitePiece();
             board[i][j].setPosition(pos2,pos1);
+             board[i][j].setNumber(pieceN);
+            pieceN++;
          } else {
-           board[i][j]=null;
+          // board[i][j]=null;
+            board[i][j]=new empty();
+            board[i][j].setNumber(0);
          }
          pos1++;
     }
@@ -33,13 +41,42 @@ public int getPosition2(int x, int y){
     return board[x][y].getPosition2();
 
 }
+public void setComio(boolean comio){
+    this.comio=comio;
+   
+}
+public boolean getComio(){
+    return comio;
+}
+public int getPieceNumber(int x, int y){
+    return board[x][y].getNumber();
+}
 public boolean movePiece(){
    /*  board[Game.getPosition1()][Game.getPosition2()].setPosition(board[Game.getPosition1()][Game.getPosition2()].move1(board[Game.getPosition1()][Game.getPosition2()].getPosition1()),board[Game.getPosition1()][Game.getPosition2()].move2(board[Game.getPosition1()][Game.getPosition2()].getPosition2()));
    
    board[Game.getPosition1()+1][Game.getPosition2()-1]=board[Game.getPosition1()][Game.getPosition2()];
    board[Game.getPosition1()][Game.getPosition2()]=null;
    */
+  if(board[Game.getPosition1()][Game.getPosition2()]==board[Game.getpos1(Game.getI())-2][Game.getpos2(Game.getJ())-2]){
+ 
+  
+if(board[Game.getpos1(Game.getI())-1][Game.getpos2(Game.getJ())-1].getColor()=="White" ){
+  //  board[Game.getpos1(Game.getI())-1][Game.getpos2(Game.getJ())-1]=new empty();
+   // System.out.println("Invalid Move - White pieces can only move upwards");
+   // return false;
+   
 
+
+    board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())]=board[Game.getPosition1()][Game.getPosition2()];
+ board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())].setPosition(Game.getpos1(Game.getI()), Game.getpos2(Game.getJ()));
+
+
+   
+board[Game.getPosition1()][Game.getPosition2()]=new empty();
+comio=true;
+return true;
+}   
+  }
 try{
 //if(board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())]!=null){
   //  throw new Exception("Invalid Move - Position Occupied");}
@@ -62,7 +99,7 @@ board[Game.getpos1(Game.getI())][Game.getpos2(Game.getJ())]=board[Game.getPositi
 
 
    
-board[Game.getPosition1()][Game.getPosition2()]=null;
+board[Game.getPosition1()][Game.getPosition2()]=new empty();
 return true;
     }
 }catch(Exception e){

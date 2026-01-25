@@ -1,6 +1,6 @@
 //import java.util.Scanner;
 public class Piece {
-private int position1,position2;
+private int position1,position2,number;
 //Board board = new Board();
 Piece() {
    
@@ -11,8 +11,8 @@ public void setPosition(int position1, int position2) {
     this.position1 = position1;
     this.position2 = position2;
 }
-public void setPosition2(int position2) {
-    this.position2 = position2;
+public void setNumber(int number) {
+    this.number = number;
 }
 public int getPosition1() {
     return position1;
@@ -22,6 +22,9 @@ public int getPosition2() {
 }
 public String getColor() {
     return "Piece";
+}
+public int getNumber() {
+    return number;
 }
 public int move1(int pos) {
     //position += 1;
